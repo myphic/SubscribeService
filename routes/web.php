@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\UserIsExists;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,16 +24,20 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
-Route::get('/dashboard', function () {
+Route::get('/app/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/app/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/app/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/app/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/{user}', function (string $user) {
+    return '<div>123</div>';
+})->middleware([UserIsExists::class])->name('profile_author');
 
 require __DIR__ . '/auth.php';
