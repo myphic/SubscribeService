@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserIsExists
@@ -16,9 +17,13 @@ class UserIsExists
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!User::where('name', $request['user'])->first()) {
-            abort(404);
-        }
+        Cache::remember('users_' . $request['user'], env('CACHE_LIFETIME'), function () use($request){
+            $user = User::where('name', $request['user'])->first();
+            if(!$user) {
+                abort(404);
+            }
+            return $user;
+        });
 
         return $next($request);
     }
