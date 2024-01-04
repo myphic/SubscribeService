@@ -6,8 +6,11 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import {Link} from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3'
 
 const showingNavigationDropdown = ref(false);
+const page = usePage()
+console.log(page.props.user)
 </script>
 
 <template>
@@ -31,6 +34,17 @@ const showingNavigationDropdown = ref(false);
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Доска
+                                </NavLink>
+                                <NavLink v-if="!$page.props.auth.user"
+                                    :href="route('login')"
+                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                >Войти
+                                </NavLink>
+
+                                <NavLink v-if="!$page.props.auth.user"
+                                    :href="route('register')"
+                                    class="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                >Регистрация
                                 </NavLink>
                             </div>
                         </div>
