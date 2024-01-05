@@ -19,6 +19,8 @@ const user = usePage().props.auth.user;
 const form = useForm({
     name: user.name,
     email: user.email,
+    avatar: user.avatar,
+    _method: 'PATCH'
 });
 </script>
 
@@ -32,7 +34,7 @@ const form = useForm({
             </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update'), {preserveScroll: true})" class="mt-6 space-y-6">
+        <form @submit.prevent="form.post(route('profile.update'), {preserveScroll: true})" class="mt-6 space-y-6">
             <div>
                 <InputLabel for="name" value="Имя"/>
 
@@ -50,7 +52,7 @@ const form = useForm({
             </div>
 
             <div>
-                <InputLabel for="email" value="Email"/>
+                <InputLabel for="email" value="Почта"/>
 
                 <TextInput
                     id="email"
@@ -62,6 +64,14 @@ const form = useForm({
                 />
 
                 <InputError class="mt-2" :message="form.errors.email"/>
+            </div>
+
+            <div>
+                <InputLabel for="avatar" value="Аватар"/>
+
+                <input type="file" id="avatar" @input="form.avatar = $event.target.files[0]" />
+
+                <InputError class="mt-2" :message="form.errors.avatar"/>
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
