@@ -20,7 +20,8 @@ const form = useForm({
     name: user.name,
     email: user.email,
     avatar: null,
-    _method: 'PATCH'
+    _method: 'PATCH',
+    old_name: user.name,
 });
 </script>
 

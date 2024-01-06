@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -45,6 +46,7 @@ class ProfileController extends Controller
         $request->user()->fill($validatedRequest);
         $request->user()->save();
 
+        Cache::forget('users_' . $request['old_name']);
         return Redirect::route('profile.edit');
     }
 
@@ -58,7 +60,7 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
-
+        Cache::forget('users_' . $request->user()->name);
         Auth::logout();
 
         $user->delete();
