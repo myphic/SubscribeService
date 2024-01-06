@@ -19,7 +19,7 @@ const user = usePage().props.auth.user;
 const form = useForm({
     name: user.name,
     email: user.email,
-    avatar: user.avatar,
+    avatar: null,
     _method: 'PATCH'
 });
 </script>
@@ -69,8 +69,8 @@ const form = useForm({
             <div>
                 <InputLabel for="avatar" value="Аватар"/>
 
-                <input type="file" id="avatar" @input="form.avatar = $event.target.files[0]" />
-
+                <input type="file" id="avatar" @input="form.avatar = $event.target.files[0]" value="" />
+                <img :src="user.avatar" />
                 <InputError class="mt-2" :message="form.errors.avatar"/>
             </div>
 

@@ -3,7 +3,6 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\UserIsExists;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
