@@ -10,7 +10,6 @@ import { usePage } from '@inertiajs/vue3'
 
 const showingNavigationDropdown = ref(false);
 const page = usePage()
-console.log(page.props.user)
 </script>
 
 <template>
