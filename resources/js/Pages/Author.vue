@@ -14,7 +14,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
             <div class="max-w-7xl mx-52 sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
                     <div class="p-6 text-gray-900">
-                        <img class="rounded w-80 h-80" :src="$page.props.author.avatar" alt="Extra large avatar">
+                        <img class="rounded w-80 h-80" :src="$page.props.author.avatar ?? '/storage/images/default/defaultavatar.jpg'"  alt="Avatar">
                     </div>
                 </div>
             </div>

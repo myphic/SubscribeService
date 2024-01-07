@@ -52,7 +52,7 @@ console.log(page.props.user)
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative flex">
-                                <img class="w-6 h-6 rounded" :src="$page.props.auth.user?.avatar" alt="Extra small avatar">
+                                <img v-if="$page.props.auth.user?.avatar" class="w-6 h-6 rounded" :src="$page.props.auth.user?.avatar" alt="Avatar">
                                 <Dropdown align="right" width="48" v-if="$page.props.auth.user?.name">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
