@@ -1,6 +1,7 @@
 <script setup>
 import {Head} from '@inertiajs/vue3';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import LinkButton from "@/Components/LinkButton.vue";
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
                     <div class="p-6 text-gray-900">
                         <img class="rounded w-80 h-80" :src="$page.props.author.avatar ?? '/storage/images/default/defaultavatar.jpg'"  alt="Avatar">
+                        <LinkButton :href="" class="my-3 w-full text-center"> Создать пост </LinkButton>
                     </div>
                 </div>
             </div>
